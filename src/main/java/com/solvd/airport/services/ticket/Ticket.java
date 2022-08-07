@@ -75,7 +75,6 @@ public class Ticket {
         result = 31 * result + (luggage != null ? luggage.hashCode() : 0);
         return result;
     }
-
     @Override
     public String toString() {
         return "Ticket{" +
