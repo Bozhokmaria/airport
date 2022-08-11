@@ -5,9 +5,7 @@ import com.solvd.airport.processes.seed_data.SeedDataAdder;
 
 public class Main {
     public static void main(String[] args) {
-        SeedDataAdder seedDataAdder = new SeedDataAdder();
-        seedDataAdder.fillWithData();
-        BuyingTicketsDesk buyingTicketsDesk = new BuyingTicketsDesk();
-        buyingTicketsDesk.proceedTicketBuying();
+        SeedDataAdder.fillWithData();
+        BuyingTicketsDesk.proceedTicketBuying();
     }
 }

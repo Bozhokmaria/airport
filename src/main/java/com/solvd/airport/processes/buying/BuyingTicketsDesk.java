@@ -19,7 +19,7 @@ public class BuyingTicketsDesk {
 
     private static final Logger LOGGER = LogManager.getLogger(BuyingTicketsDesk.class);
 
-    public void proceedTicketBuying() {
+    public static void proceedTicketBuying() {
         Ticket ticket = new Ticket();
         boolean successfulPayment = false;
 
@@ -51,9 +51,16 @@ public class BuyingTicketsDesk {
             ticket.setPassenger(passenger1);
         }
 
-        LOGGER.info("Enter do passenger have luggage 1 - yes, 2 - no");
-        int luggage = scanner.nextInt();
-        Luggage luggage1 = new Luggage();
+        LOGGER.info("Enter do passenger have luggage 1 - yes, 2 - no. By default - no luggage");
+        int luggage = 2;
+
+        try {
+            luggage = scanner.nextInt();
+        } catch (RuntimeException e) {
+            LOGGER.error(e + " - Wrong input");
+        }
+
+        Luggage luggage1;
         try {
             if (luggage == 1) {
                 luggage1 = new Luggage("lug" + passenger.getId());

@@ -12,7 +12,6 @@ import com.solvd.airport.people.employee.Employee;
 import com.solvd.airport.people.employee.repo.EmployeeRepositoryImpl;
 import com.solvd.airport.people.pilot.Pilot;
 import com.solvd.airport.people.pilot.repo.PilotRepositoryImpl;
-import com.solvd.airport.processes.buying.BuyingTicketsDesk;
 import com.solvd.airport.services.flight.Flight;
 import com.solvd.airport.services.flight.repo.FlightRepositoryImpl;
 import com.solvd.airport.services.informational.arrival.Arrival;
@@ -28,7 +27,7 @@ public class SeedDataAdder {
 
     private static final Logger LOGGER = LogManager.getLogger(SeedDataAdder.class);
 
-    public void fillWithData(){
+    public static void fillWithData(){
         addGates();
         addTerminals();
         addAirports();
@@ -40,7 +39,7 @@ public class SeedDataAdder {
         addFlights();
     }
 
-    private void addGates() {
+    private static void addGates() {
         GateRepositoryImpl gateRepository = GateRepositoryImpl.getGateRepositoryImpl();
 
         Gate gateA = new Gate("A");
@@ -50,7 +49,7 @@ public class SeedDataAdder {
         gateRepository.addGate(gateB);
     }
 
-    private void addTerminals() {
+    private static void addTerminals() {
         TerminalRepositoryImpl terminalRepository = TerminalRepositoryImpl.getTerminalRepositoryImpl();
         GateRepositoryImpl gateRepository = GateRepositoryImpl.getGateRepositoryImpl();
 
@@ -61,7 +60,7 @@ public class SeedDataAdder {
         terminalRepository.addTerminal(terminalSouth);
     }
 
-    private void addAirports() {
+    private static void addAirports() {
         TerminalRepositoryImpl terminalRepository = TerminalRepositoryImpl.getTerminalRepositoryImpl();
         AirportRepositoryImpl airportRepository = AirportRepositoryImpl.getAirportRepositoryImpl();
 
@@ -77,7 +76,7 @@ public class SeedDataAdder {
 
     }
 
-    private void addPlanes() {
+    private static void addPlanes() {
         PlaneRepositoryImpl planeRepository = PlaneRepositoryImpl.getPlaneRepositoryImpl();
 
         Plane gulfstreamG100 = new Plane("Gulfstream G100", 7);
@@ -89,7 +88,7 @@ public class SeedDataAdder {
         planeRepository.addPlane(boeing737NG);
     }
 
-    public void addPilots() {
+    public static void addPilots() {
         PilotRepositoryImpl pilotRepository = PilotRepositoryImpl.getPilotRepositoryImpl();
 
         Pilot pilot = new Pilot("1A", "Peter", "James", 15000);
@@ -101,7 +100,7 @@ public class SeedDataAdder {
         pilotRepository.addPilot(pilot3);
     }
 
-    private void addEmployees() {
+    private static void addEmployees() {
         EmployeeRepositoryImpl employeeRepository = EmployeeRepositoryImpl.getEmployeeRepositoryImpl();
 
         Employee employee = new Employee("1A", "Lucy", "Linn", "Receptionist",
@@ -118,7 +117,7 @@ public class SeedDataAdder {
         employeeRepository.addEmployee(employee2);
     }
 
-    private void addDepartures() {
+    private static void addDepartures() {
         DepartureRepositoryImpl departureRepository = DepartureRepositoryImpl.getDepartureRepositoryImpl();
 
         Departure departure = new Departure("1", AirportRepositoryImpl.getAirportRepositoryImpl().findAirportByName("Fiumicino"),
@@ -140,7 +139,7 @@ public class SeedDataAdder {
     }
 
 
-    private void addArrivals() {
+    private static void addArrivals() {
         ArrivalRepositoryImpl arrivalRepository = ArrivalRepositoryImpl.getArrivalRepositoryImpl();
         DepartureRepositoryImpl departureRepository = DepartureRepositoryImpl.getDepartureRepositoryImpl();
 
@@ -162,7 +161,7 @@ public class SeedDataAdder {
         arrivalRepository.addArrival(arrival3);
     }
 
-    private void addFlights() {
+    private static void addFlights() {
         FlightRepositoryImpl flightRepository = FlightRepositoryImpl.getFlightRepositoryImpl();
         PlaneRepositoryImpl planeRepository = PlaneRepositoryImpl.getPlaneRepositoryImpl();
         DepartureRepositoryImpl departureRepository = DepartureRepositoryImpl.getDepartureRepositoryImpl();
