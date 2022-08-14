@@ -1,6 +1,5 @@
 package com.solvd.airport.people.employee.repo;
 
-import com.solvd.airport.exception.EntityAlreadyExistsException;
 import com.solvd.airport.exception.NoSuchElementException;
 import com.solvd.airport.people.employee.Employee;
 

@@ -37,6 +37,22 @@ public class FlightRepositoryImpl implements FlightRepository {
     }
 
     @Override
+    public List<Flight> findFlightByDepartureCity(String city) {
+        List<Flight> availableFlights = flights.stream()
+                .filter(flight -> flight.getDeparture().getAirport().getCity().equals(city))
+                .collect(Collectors.toList());
+        return availableFlights;
+    }
+
+    @Override
+    public List<Flight> findFlightByArrivalCity(String city) {
+        List<Flight> availableFlights = flights.stream()
+                .filter(flight -> flight.getArrival().getAirport().getCity().equals(city))
+                .collect(Collectors.toList());
+        return availableFlights;
+    }
+
+    @Override
     public Flight findFlightByFlightId(String flightId) {
         Flight flight = flights.stream().filter(flight1 -> flight1.getFlightId().equals(flightId)).findAny().orElse(null);
         return flight;

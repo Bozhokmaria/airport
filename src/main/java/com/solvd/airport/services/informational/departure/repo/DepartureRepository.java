@@ -28,6 +28,11 @@ public interface DepartureRepository {
     Departure findDepartureByAirportName(String airportName);
 
     /**
+     * Find departure by city
+     */
+    Set<Departure> findDeparturesByCity(String city);
+
+    /**
      * Deletes departure from the departures' repository if it is present
      */
     Set<Departure> deleteDeparture(Departure departure);

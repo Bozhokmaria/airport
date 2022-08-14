@@ -22,6 +22,16 @@ public interface FlightRepository {
     List <Flight> findFlightByDepartureCountryName(String country);
 
     /**
+     * Find flight by departure city name
+     */
+    List <Flight> findFlightByDepartureCity(String city);
+
+    /**
+     * Find flight by arrival city name
+     */
+    public List<Flight> findFlightByArrivalCity(String city);
+
+    /**
      * Deletes flight from the flight' repository if it is present
      */
     List<Flight> deleteFlight(Flight flight);

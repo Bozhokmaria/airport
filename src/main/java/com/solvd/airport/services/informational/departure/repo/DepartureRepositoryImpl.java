@@ -7,6 +7,7 @@ import com.solvd.airport.main.airport.Airport;
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class DepartureRepositoryImpl implements DepartureRepository {
     private Set<Departure> departures = new LinkedHashSet<>();
@@ -54,6 +55,16 @@ public class DepartureRepositoryImpl implements DepartureRepository {
                 departures.stream().filter(departure1 -> departure1.getAirport().getName().equals(airportName)).findAny()
                         .orElseThrow(() -> new NoSuchElementException("There is no suitable departure from this airport"));
         return departure;
+    }
+
+    @Override
+    public Set<Departure> findDeparturesByCity(String city) {
+        Set<Departure> departuresFromCity =
+                departures.stream().filter(departure1 -> departure1.getAirport().getCity().equals(city)).collect(Collectors.toSet());
+        if(departuresFromCity.isEmpty()){
+            throw new NoSuchElementException("There is no departures from " + city);
+        }
+        return departuresFromCity;
     }
 
     @Override
