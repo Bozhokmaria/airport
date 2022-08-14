@@ -35,7 +35,6 @@ public class PassengerRepositoryImpl implements PassengerRepository {
     public Passenger findPassengerById(String id) {
         Passenger passenger = passengers.stream().filter(passenger1 -> passenger1.getId().equals(id)).findAny()
                 .orElse(null);
-        //Throw(() -> new NoSuchElementException("There is no passenger with the given id: " + id));
         return passenger;
     }
 

@@ -24,6 +24,11 @@ public interface ArrivalRepository {
     Arrival findArrivalByAirportName(String airportName);
 
     /**
+     * Find arrival by city
+     */
+    Set<Arrival> findArrivalByCity(String city);
+
+    /**
      * Updates arrival with the id that is currently present in the arrivals repository
      */
     Set<Arrival> updateArrival(Arrival arrival);

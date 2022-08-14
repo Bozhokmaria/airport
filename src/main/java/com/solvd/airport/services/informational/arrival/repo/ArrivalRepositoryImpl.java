@@ -4,11 +4,11 @@ import com.solvd.airport.exception.EntityAlreadyExistsException;
 import com.solvd.airport.exception.NoSuchElementException;
 import com.solvd.airport.services.informational.arrival.Arrival;
 import com.solvd.airport.main.airport.Airport;
-import com.solvd.airport.services.informational.departure.Departure;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ArrivalRepositoryImpl implements ArrivalRepository {
     private Set<Arrival> arrivals = new LinkedHashSet<>();
@@ -75,5 +75,12 @@ public class ArrivalRepositoryImpl implements ArrivalRepository {
                 arrivals.stream().filter(a -> a.getAirport().getName().equals(airportName)).findAny()
                         .orElseThrow(() -> new NoSuchElementException("There is no arrival to this airport"));
         return arrival;
+    }
+
+    @Override
+    public Set<Arrival> findArrivalByCity(String city) {
+        Set<Arrival> arrivalFromCity =
+                arrivals.stream().filter(a -> a.getAirport().getCity().equals(city)).collect(Collectors.toSet());
+        return arrivalFromCity;
     }
 }
