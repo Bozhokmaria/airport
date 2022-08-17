@@ -191,8 +191,5 @@ public class SeedDataAdder {
         flightRepository.addFlight(fromBoryspilToChopin);
         flightRepository.addFlight(fromCharlesDeGaulleToBoryspil);
         flightRepository.addFlight(fromFiumicinoToCharlesDeGaulle);
-
-       LOGGER.info("from Ukraine" + flightRepository.findFlightByDepartureCountryName("Ukraine"));
-
     }
 }

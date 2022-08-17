@@ -3,6 +3,7 @@ package com.solvd.airport.processes.buying;
 import com.solvd.airport.exception.WrongFormatException;
 import com.solvd.airport.people.passanger.Passenger;
 import com.solvd.airport.people.passanger.repo.PassengerRepositoryImpl;
+import com.solvd.airport.processes.enums.PaymentMethod;
 import com.solvd.airport.services.flight.Flight;
 import com.solvd.airport.services.flight.repo.FlightRepositoryImpl;
 import com.solvd.airport.services.luggage.Luggage;
@@ -252,28 +253,42 @@ public class BuyingTicketsDesk {
             LOGGER.info("Price іs: " + flight.getPrice());
             LOGGER.info("Pay by card or cash. Type 1 for card, 2 -cash");
             int paymentMethod = scanner.nextInt();
+            PaymentMethod method = null;
 
-            if (paymentMethod == 2) {
-                LOGGER.info("Amount of money from passenger");
-                double cash = scanner.nextDouble();
-                try {
-                    if (cash < 0
-                            ||
-                            (flight.getPrice() - ((flight.getPrice() * passenger.getDiscount()) / 100)) > cash) {
-                        throw new WrongFormatException("Amount of money cant be negative or less than ticket price");
-                    } else {
-                        double change = cash - (flight.getPrice() - ((flight.getPrice() * passenger.getDiscount()) / 100));
+            if (paymentMethod == 1) {
+                method = PaymentMethod.CARD;
+
+            } else if (paymentMethod == 2) {
+                method = PaymentMethod.CASH;
+            }
+
+            if (method != null) {
+                switch (method) {
+                    case CARD:
                         unsuccessfulPayment = false;
-                        LOGGER.info("Cash. Your change: " + change);
-
-                    }
-                } catch (RuntimeException e) {
-                    LOGGER.error(e);
+                        FlightRepositoryImpl.getFlightRepositoryImpl().findFlightByFlightId(flight.getFlightId())
+                                .getPlane().setCapacity(--capacity);
+                        break;
+                    case CASH:
+                        LOGGER.info("Amount of money from passenger");
+                        double cash = scanner.nextDouble();
+                        try {
+                            if (cash < 0
+                                    ||
+                                    (flight.getPrice() - ((flight.getPrice() * passenger.getDiscount()) / 100)) > cash) {
+                                throw new WrongFormatException("Amount of money cant be negative or less than ticket price");
+                            } else {
+                                double change = cash - (flight.getPrice() - ((flight.getPrice() * passenger.getDiscount()) / 100));
+                                unsuccessfulPayment = false;
+                                LOGGER.info("Cash. Your change: " + change);
+                                FlightRepositoryImpl.getFlightRepositoryImpl().findFlightByFlightId(flight.getFlightId())
+                                        .getPlane().setCapacity(--capacity);
+                            }
+                        } catch (RuntimeException e) {
+                            LOGGER.error(e);
+                        }
+                        break;
                 }
-            } else if (paymentMethod == 1) {
-                unsuccessfulPayment = false;
-                FlightRepositoryImpl.getFlightRepositoryImpl().findFlightByFlightId(flight.getFlightId())
-                        .getPlane().setCapacity(--capacity);
             }
         }
     }
