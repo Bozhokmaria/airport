@@ -22,15 +22,6 @@ public class Pilot extends Person {
     }
 
     @Override
-    public void setDiscount(double discount) {
-        if (discount < 85 && discount > 0) {
-            this.setDiscount(discount + 15);
-        } else {
-            this.setDiscount(15);
-        }
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Pilot)) return false;
