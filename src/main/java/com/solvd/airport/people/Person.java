@@ -1,10 +1,13 @@
 package com.solvd.airport.people;
 
+import com.solvd.airport.processes.enums.Discount;
+
 public abstract class Person {
     private String id;
     private String name;
     private String lastName;
-    private double discount;
+//    private double discount;
+    private Discount discount = Discount.ORDINARY;
 
     public Person() {
     }
@@ -39,39 +42,33 @@ public abstract class Person {
         this.lastName = lastName;
     }
 
-    public double getDiscount() {
+    public Discount getDiscount() {
         return discount;
     }
 
-    public void setDiscount(double discount) {
-        if (discount < 100 && discount > 0) {
-            this.discount = discount;
-        }
-        this.discount = 0;
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Person)) return false;
 
         Person person = (Person) o;
 
-        if (Double.compare(person.discount, discount) != 0) return false;
         if (id != null ? !id.equals(person.id) : person.id != null) return false;
         if (name != null ? !name.equals(person.name) : person.name != null) return false;
-        return lastName != null ? lastName.equals(person.lastName) : person.lastName == null;
+        if (lastName != null ? !lastName.equals(person.lastName) : person.lastName != null) return false;
+        return discount == person.discount;
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = id != null ? id.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        temp = Double.doubleToLongBits(discount);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (discount != null ? discount.hashCode() : 0);
         return result;
     }
 

@@ -43,15 +43,6 @@ public class Employee extends Person {
     }
 
     @Override
-    public void setDiscount(double discount) {
-        if (discount < 95 && discount > 0) {
-            this.setDiscount(discount + 5);
-        } else {
-            this.setDiscount(5);
-        }
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

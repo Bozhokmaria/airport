@@ -3,6 +3,7 @@ package com.solvd.airport.processes.buying;
 import com.solvd.airport.exception.WrongFormatException;
 import com.solvd.airport.people.passanger.Passenger;
 import com.solvd.airport.people.passanger.repo.PassengerRepositoryImpl;
+import com.solvd.airport.processes.enums.Discount;
 import com.solvd.airport.processes.enums.PaymentMethod;
 import com.solvd.airport.services.flight.Flight;
 import com.solvd.airport.services.flight.repo.FlightRepositoryImpl;
@@ -89,8 +90,8 @@ public class BuyingTicketsDesk {
             passengerRepository.addPassenger(passenger);
             LOGGER.info("Passenger did not use the airport system. Add to the system: " + passenger);
         } else {
-            passenger1.setDiscount(3);
-            LOGGER.info("Passenger already used the airport system. Set discount " + passenger1.getDiscount());
+            passenger.setDiscount(Discount.REGULAR);
+            LOGGER.info("Passenger already used the airport system. Set discount " + passenger.getDiscount());
         }
     }
 
@@ -246,11 +247,13 @@ public class BuyingTicketsDesk {
     private static void proceedPayment(Flight flight, Passenger passenger) {
         boolean unsuccessfulPayment = true;
         int capacity = flight.getPlane().getCapacity();
+        double price = (flight.getPrice() - ((flight.getPrice()
+                * passenger.getDiscount().getDiscount()))/100);
 
         Scanner scanner = new Scanner(System.in);
 
         while (unsuccessfulPayment) {
-            LOGGER.info("Price іs: " + flight.getPrice());
+            LOGGER.info("Price іs: " + flight.getPrice() + " " + "discount is - " + passenger.getDiscount().getDiscount() + " need to pay " + price);
             LOGGER.info("Pay by card or cash. Type 1 for card, 2 -cash");
             int paymentMethod = scanner.nextInt();
             PaymentMethod method = null;
@@ -273,12 +276,13 @@ public class BuyingTicketsDesk {
                         LOGGER.info("Amount of money from passenger");
                         double cash = scanner.nextDouble();
                         try {
+                            LOGGER.info("Price passenger need to pay : " + price);
                             if (cash < 0
                                     ||
-                                    (flight.getPrice() - ((flight.getPrice() * passenger.getDiscount()) / 100)) > cash) {
+                                    (flight.getPrice() - ((flight.getPrice() * passenger.getDiscount().getDiscount()) / 100)) > cash) {
                                 throw new WrongFormatException("Amount of money cant be negative or less than ticket price");
                             } else {
-                                double change = cash - (flight.getPrice() - ((flight.getPrice() * passenger.getDiscount()) / 100));
+                                double change = cash - (flight.getPrice() - ((flight.getPrice() * passenger.getDiscount().getDiscount()) / 100));
                                 unsuccessfulPayment = false;
                                 LOGGER.info("Cash. Your change: " + change);
                                 FlightRepositoryImpl.getFlightRepositoryImpl().findFlightByFlightId(flight.getFlightId())

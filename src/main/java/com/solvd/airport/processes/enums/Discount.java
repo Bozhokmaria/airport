@@ -6,6 +6,13 @@ public enum Discount {
     ORDINARY(0),
     REGULAR(15);
 
+    private final double discount;
+
     Discount(int discount) {
+        this.discount = discount;
+    }
+
+    public double getDiscount() {
+        return discount;
     }
 }

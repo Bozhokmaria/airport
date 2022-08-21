@@ -12,15 +12,6 @@ public class Passenger extends Person {
     }
 
     @Override
-    public void setDiscount(double discount) {
-        if (discount < 97 && discount > 0) {
-            this.setDiscount(discount + 3);
-        } else {
-            this.setDiscount(3);
-        }
-    }
-
-    @Override
     public String toString() {
         return "Passenger{" + super.toString() + "}";
     }

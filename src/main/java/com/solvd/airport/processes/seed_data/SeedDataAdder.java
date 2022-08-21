@@ -10,6 +10,8 @@ import com.solvd.airport.main.terminal.Terminal;
 import com.solvd.airport.main.terminal.repo.TerminalRepositoryImpl;
 import com.solvd.airport.people.employee.Employee;
 import com.solvd.airport.people.employee.repo.EmployeeRepositoryImpl;
+import com.solvd.airport.people.passanger.Passenger;
+import com.solvd.airport.people.passanger.repo.PassengerRepositoryImpl;
 import com.solvd.airport.people.pilot.Pilot;
 import com.solvd.airport.people.pilot.repo.PilotRepositoryImpl;
 import com.solvd.airport.services.flight.Flight;
@@ -37,11 +39,13 @@ public class SeedDataAdder {
         addDepartures();
         addArrivals();
         addFlights();
+        addPassengers();
     }
 
     private static void addGates() {
         GateRepositoryImpl gateRepository = GateRepositoryImpl.getGateRepositoryImpl();
 
+        LOGGER.info("Gates were added");
         Gate gateA = new Gate("A");
         Gate gateB = new Gate("B");
 
@@ -88,7 +92,7 @@ public class SeedDataAdder {
         planeRepository.addPlane(boeing737NG);
     }
 
-    public static void addPilots() {
+    private static void addPilots() {
         PilotRepositoryImpl pilotRepository = PilotRepositoryImpl.getPilotRepositoryImpl();
 
         Pilot pilot = new Pilot("1A", "Peter", "James", 15000);
@@ -191,5 +195,12 @@ public class SeedDataAdder {
         flightRepository.addFlight(fromBoryspilToChopin);
         flightRepository.addFlight(fromCharlesDeGaulleToBoryspil);
         flightRepository.addFlight(fromFiumicinoToCharlesDeGaulle);
+    }
+
+    private static void addPassengers() {
+        Passenger passenger = new Passenger("FR1212", "Mariia", "Bozhok");
+        PassengerRepositoryImpl passengerRepository = PassengerRepositoryImpl.getPassengerRepositoryImpl();
+        passengerRepository.addPassenger(passenger);
+
     }
 }
