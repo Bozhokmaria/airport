@@ -4,5 +4,5 @@ import java.lang.reflect.InvocationTargetException;
 
 @FunctionalInterface
 public interface InvokePrivateMethod {
-    void getPrivateMethod() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException;
+    void invokePrivateMethod() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException;
 }

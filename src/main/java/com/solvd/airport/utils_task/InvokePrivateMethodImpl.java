@@ -16,12 +16,12 @@ public class InvokePrivateMethodImpl implements InvokePrivateMethod {
 
         LOGGER.info("Before invoking private method");
         InvokePrivateMethodImpl invokePrivateMethod = new InvokePrivateMethodImpl();
-        invokePrivateMethod.getPrivateMethod();
+        invokePrivateMethod.invokePrivateMethod();
         LOGGER.info("After invoking private method");
 
         InvokePrivateMethod privateMethod = new InvokePrivateMethod() {
             @Override
-            public void getPrivateMethod() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+            public void invokePrivateMethod() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
                 StringUtilsTask stringUtilsTask = new StringUtilsTask();
                 Method privateMethod
                         = StringUtilsTask.class.getDeclaredMethod("getFile", String.class);
@@ -32,12 +32,12 @@ public class InvokePrivateMethodImpl implements InvokePrivateMethod {
         };
 
         LOGGER.info("Before invoking private method");
-        privateMethod.getPrivateMethod();
+        privateMethod.invokePrivateMethod();
         LOGGER.info("After invoking private method");
     }
 
     @Override
-    public void getPrivateMethod() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void invokePrivateMethod() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method indexOfMethod = SeedDataAdder.class.getDeclaredMethod("addGates");
         indexOfMethod.setAccessible(true);
         indexOfMethod.invoke(SeedDataAdder.class);
