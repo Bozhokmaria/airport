@@ -12,14 +12,6 @@ public class InvokePrivateMethodImpl implements InvokePrivateMethod {
 
     private static final Logger LOGGER = LogManager.getLogger(InvokePrivateMethodImpl.class);
 
-    @Override
-    public void getPrivateMethod() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method indexOfMethod = SeedDataAdder.class.getDeclaredMethod("addGates");
-        indexOfMethod.setAccessible(true);
-        indexOfMethod.invoke(SeedDataAdder.class);
-        LOGGER.info("In private method.");
-    }
-
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
 
         LOGGER.info("Before invoking private method");
@@ -42,5 +34,13 @@ public class InvokePrivateMethodImpl implements InvokePrivateMethod {
         LOGGER.info("Before invoking private method");
         privateMethod.getPrivateMethod();
         LOGGER.info("After invoking private method");
+    }
+
+    @Override
+    public void getPrivateMethod() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method indexOfMethod = SeedDataAdder.class.getDeclaredMethod("addGates");
+        indexOfMethod.setAccessible(true);
+        indexOfMethod.invoke(SeedDataAdder.class);
+        LOGGER.info("In private method.");
     }
 }
