@@ -1,16 +1,12 @@
 package com.solvd.airport.utils_task;
 
 import com.solvd.airport.processes.seed_data.SeedDataAdder;
-import org.apache.commons.io.Charsets;
-import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.nio.charset.StandardCharsets;
 
 public class InvokePrivateMethodImpl implements InvokePrivateMethod {
 
