@@ -1,4 +1,4 @@
-package com.solvd.airport.utils_task;
+package com.solvd.airport.tasks;
 
 import com.solvd.airport.processes.seed_data.SeedDataAdder;
 import org.apache.logging.log4j.LogManager;

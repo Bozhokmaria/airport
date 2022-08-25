@@ -1,4 +1,4 @@
-package com.solvd.airport.utils_task;
+package com.solvd.airport.tasks;
 
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;

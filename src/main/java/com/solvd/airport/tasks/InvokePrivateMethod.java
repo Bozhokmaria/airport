@@ -1,4 +1,4 @@
-package com.solvd.airport.utils_task;
+package com.solvd.airport.tasks;
 
 import java.lang.reflect.InvocationTargetException;
 
