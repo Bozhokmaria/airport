@@ -1,5 +1,6 @@
 package com.solvd.airport.tasks;
 
+import java.time.LocalDateTime;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -13,7 +14,7 @@ public class Pool {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("Hello 1");
+            System.out.println("Hello 1 " + LocalDateTime.now());
         });
         executor.submit(() -> {
             try {
@@ -21,7 +22,7 @@ public class Pool {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("Hello 2");
+            System.out.println("Hello 2 " + LocalDateTime.now());
         });
         executor.submit(() -> {
             try {
@@ -29,7 +30,7 @@ public class Pool {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("Hello 3");
+            System.out.println("Hello 3 " + LocalDateTime.now());
         });
 
         //first will be executed main thread
